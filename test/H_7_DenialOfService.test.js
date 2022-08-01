@@ -49,9 +49,10 @@ contract("H_7_DenialOfService.test.js", () => {
     console.log(" ");
 
 
-    console.log('-------------------------------------------------------------------------------');
+    console.log('-------------------------------------------------------------------------------');       // PUSH vs CALL problem
     console.log("Second playter (Attack!)");
-    await Attack.attack({from: accounts[9], value: amount_In_filter(2)});
+    await Attack.attack({from: accounts[9], value: amount_In_filter(2)});                               // Test fails
+    //await Victim.claimThrone({from: accounts[2], value: amount_In_filter(2)});                            // Test success              
     console.log(" ");
 
     console.log('-------------------------------------------------------------------------------');
@@ -61,9 +62,13 @@ contract("H_7_DenialOfService.test.js", () => {
 
     console.log('-------------------------------------------------------------------------------');
     console.log("Third player")
-    await Victim.claimThrone({from: accounts[2], value: amount_In_filter(3)});
+    await Victim.claimThrone({from: accounts[3], value: amount_In_filter(3)});
     console.log(" ");
   
+    console.log('-------------------------------------------------------------------------------');
+    console.log(`KingOfEther balance:   ${amount_Out_filter(await web3.eth.getBalance(Victim.address))}`);
+    console.log(`KingOfEther:           ${await Victim.king()}`);  
+    console.log(" ");
   });
 
 });
